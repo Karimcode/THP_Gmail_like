@@ -1,0 +1,7 @@
+$(document).ready(function() {
+	//remove italic
+	$('#<%=@email.id%>').removeClass('font-weight-bold'); // should do nothing of class isnt there in a first place => to check
+  $('#content-child').remove();
+  $('#mail-display').append("<%= j render 'show',email: @email %>");
+
+});

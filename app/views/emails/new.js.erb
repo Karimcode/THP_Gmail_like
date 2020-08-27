@@ -1,0 +1,4 @@
+$(document).ready(function() {
+  //ajout du object mail a la liste
+  $(".mail-list").find("ul").append("<%= j render 'newEmail',email: @email %>");
+});

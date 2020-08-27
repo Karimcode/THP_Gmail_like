@@ -1,0 +1,12 @@
+<div id="content-child">
+  <h4><%= @email.object %></h4>
+  <p><%= @email.body %></p>
+  <div id='mail-display-buttons'>
+    <%= link_to email_path(@email), data: {:confirm => 'Are you sure?'}, :method => :delete, remote: true  do %>
+      <%= fa_icon "trash-alt", style: "color:orange;"%>
+    <% end %>
+    <%= link_to email_path(@email,invertRead: true), remote: true, :method => :put do %>
+      <%= fa_icon "bookmark", style: "color:blue;"%>
+    <% end %>
+  </div>
+</div>

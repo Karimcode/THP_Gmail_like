@@ -1,0 +1,6 @@
+$(document).ready(function() {
+  $("#content-"+ <%= @task.category_id %>).find("ul").append("<%= j render 'task',task: @task %>");
+  $(".category-content").addClass("d-none");
+  $('#content-' + <%=@task.category_id %>).removeClass("d-none");
+  $(".notice").text("Task sucesfuly added");
+});

@@ -1,0 +1,4 @@
+$(document).ready(function() {
+  $("#task-"+ <%= @task.id %>).toggleClass("statusTrue");
+  console.log($("#task-"+ <%= @task.id %>));
+});

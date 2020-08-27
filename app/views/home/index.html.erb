@@ -1,0 +1,49 @@
+<h1 class="text-center mb-4">Welcome to my todolist app</h1>
+<%= render 'layouts/task_form'  %>
+<ul class="nav nav-pills">
+  <% @categories.each do  |category|%>
+    <li class="btn category-name btn-primary m-1" id="<%= category.id%>"><%= category.title  %></li>
+  <%end%>
+</ul>
+<div class="tab-content">
+  <% @categories.each do  |category|%>
+    <div id="content-<%= category.id  %>" class="card category-content">
+      <h3 class="card-title"><%= category.title  %></h3>
+      <ul class= "card-content">
+        <% category.tasks.each do |task|  %>
+          <li id="task-<%= task.id%>" <% if task.status  %> class="statusTrue" <% end %> >
+            <%= task.title  %>
+            <% unless task.deadline.nil? %>
+              , to read: <%= task.deadline.strftime('%D')  %>
+            <%end%>
+            <%= check_box_tag :task, task.status, task.status , data: { remote: true, url: task_path(task), params: { id: task.id, origin: "checkbox"}.to_param, method: "put" }%>
+            <%= link_to task_path(task), data: {:confirm => 'Are you sure?'}, :method => :delete, remote: true  do %>
+              <%= fa_icon "trash-alt", style: "color:orange;"%>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <%end%>
+</div>
+<div class="container">
+  <div class="row d-none">
+    <% @tasks.each do |task|  %>
+      <div class="card col-3">
+        <% unless task.image.nil? %>
+          <%= image_tag task.image, class: "carousel-img rounded-circle w-100" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="carousel m-5">
+    <div class="carousel-controller d-flex align-items-center">
+      <div class=""><%= fa_icon "arrow-left 2x",  id: "prev", style: "color:grey;"%></div>
+      <img class=""src="">
+      <div class="" id="next"><%= fa_icon "arrow-right 2x",  id: "next", style: "color:grey;"%></div>
+    </div>
+    <div class="carousel-indicators">
+      <%= fa_icon "grip-lines",class: "indicator m-2 text-danger"%>
+    </div>
+  </div>
+</div>
